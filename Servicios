@@ -1,0 +1,79 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
+import { useRouter } from "next/router";
+
+const services = [
+  {
+    title: "Lavado Premium",
+    description:
+      "\u2022 Lavado exterior e interior\n\u2022 Productos de alta gama\n\u2022 Limpieza de llantas y cristales\n\u2022 Aspirado completo",
+    price: "60€",
+    image: "/images/lavado.jpg",
+    link: "/servicios/lavado-premium"
+  },
+  {
+    title: "Pulido y Corrección",
+    description:
+      "\u2022 Eliminación de swirls y arañazos leves\n\u2022 Recuperación de brillo\n\u2022 Aplicación de polish profesional",
+    price: "150€",
+    image: "/images/pulido.jpg",
+    link: "/servicios/pulido-correccion"
+  },
+  {
+    title: "Coating Cerámico",
+    description:
+      "\u2022 Protección cerámica de larga duración\n\u2022 Brillo intenso\n\u2022 Repele suciedad y agua",
+    price: "250€",
+    image: "/images/coating.jpg",
+    link: "/servicios/coating-ceramico"
+  },
+  {
+    title: "Limpieza Interior Pro",
+    description:
+      "\u2022 Limpieza y desinfección profunda\n\u2022 Asientos, alfombrillas, salpicadero\n\u2022 Zonas de difícil acceso",
+    price: "90€",
+    image: "/images/interior.jpg",
+    link: "/servicios/limpieza-interior"
+  },
+];
+
+export default function AutoGlowPG() {
+  const router = useRouter();
+
+  return (
+    <div
+      className="min-h-screen bg-cover bg-center text-black p-6 font-sans"
+      style={{ backgroundImage: "url('/images/marmol-blanco.jpg')" }}
+    >
+      <h1 className="text-4xl font-bold text-center text-yellow-600 mb-8">
+        AutoGlow PG
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {services.map((service, index) => (
+          <motion.div
+            key={index}
+            whileHover={{ scale: 1.05 }}
+            className="cursor-pointer"
+            onClick={() => router.push(service.link)}
+          >
+            <Card className="bg-white bg-opacity-80 border-yellow-600 border-2 rounded-2xl shadow-xl overflow-hidden">
+              <img
+                src={service.image}
+                alt={service.title}
+                className="w-full h-32 object-cover"
+              />
+              <CardContent className="p-4">
+                <h2 className="text-xl font-semibold text-yellow-700">
+                  {service.title}
+                </h2>
+                <p className="text-sm mt-2">Desde {service.price}</p>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
